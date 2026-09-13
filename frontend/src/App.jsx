@@ -11,6 +11,8 @@ import AnalysisDetailModal from './components/AnalysisDetailModal';
 import ModelStatusModal from './components/ModelStatusModal';
 import HowItWorksModal from './components/HowItWorksModal';
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export default function App() {
   const [activeTab, setActiveTab] = useState('home'); // 'home', 'analyze', 'dashboard', 'history'
   const [healthStatus, setHealthStatus] = useState('unknown');
@@ -36,7 +38,7 @@ export default function App() {
 
   const fetchHealth = async () => {
     try {
-      const res = await fetch('/api/v1/health');
+      const res = await fetch(`${API_BASE}/api/v1/health`);
       if (res.ok) {
         const data = await res.json();
         setHealthStatus(data.status);
@@ -50,7 +52,7 @@ export default function App() {
 
   const fetchModelInfo = async () => {
     try {
-      const res = await fetch('/api/v1/model/info');
+      const res = await fetch(`${API_BASE}/api/v1/model/info`);
       if (res.ok) {
         const data = await res.json();
         setModelInfo(data);
@@ -62,7 +64,7 @@ export default function App() {
 
   const fetchStats = async () => {
     try {
-      const res = await fetch('/api/v1/dashboard/stats');
+      const res = await fetch(`${API_BASE}/api/v1/dashboard/stats`);
       if (res.ok) {
         const data = await res.json();
         setStats(data);
@@ -74,7 +76,7 @@ export default function App() {
 
   const fetchAnalyses = async () => {
     try {
-      const res = await fetch('/api/v1/analyses');
+      const res = await fetch(`${API_BASE}/api/v1/analyses`);
       if (res.ok) {
         const data = await res.json();
         setAnalyses(data);
@@ -89,7 +91,7 @@ export default function App() {
     setCurrentAnalysis(null);
 
     try {
-      const res = await fetch('/api/v1/analyze', {
+      const res = await fetch(`${API_BASE}/api/v1/analyze`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -132,7 +134,7 @@ export default function App() {
     if (!window.confirm('Are you sure you want to delete this analysis entry?')) return;
 
     try {
-      const res = await fetch(`/api/v1/analyses/${analysisId}`, { method: 'DELETE' });
+      const res = await fetch(`${API_BASE}/api/v1/analyses/${analysisId}`, { method: 'DELETE' });
       if (res.ok) {
         if (currentAnalysis && currentAnalysis.analysis_id === analysisId) {
           setCurrentAnalysis(null);
