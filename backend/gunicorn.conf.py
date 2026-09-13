@@ -1,7 +1,7 @@
 import os
 
-# Bind to 0.0.0.0 on the port specified by Render (via PORT env var)
-port = os.environ.get("PORT", "5000")
+# Render sets the PORT env variable automatically (default 10000)
+port = os.environ.get("PORT", "10000")
 bind = f"0.0.0.0:{port}"
 
 # Production worker settings
