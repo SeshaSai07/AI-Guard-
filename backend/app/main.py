@@ -15,6 +15,14 @@ def create_app():
     # Register API blueprint
     app.register_blueprint(api_bp)
 
+    @app.route("/")
+    def index():
+        return jsonify({
+            "status": "healthy",
+            "service": "JobShield AI API",
+            "version": "1.0.0"
+        }), 200
+
     @app.errorhandler(404)
     def not_found(e):
         return jsonify({"error": "Endpoint not found"}), 404
