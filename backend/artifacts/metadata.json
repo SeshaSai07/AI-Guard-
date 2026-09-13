@@ -1,0 +1,13 @@
+{
+  "version": "tfidf-logreg-v1",
+  "algorithm": "TF-IDF + Logistic Regression",
+  "training_date": "2026-09-09T15:49:20.445184+00:00",
+  "metrics": {
+    "accuracy": 0.8,
+    "precision": 0.6666666666666666,
+    "recall": 1.0,
+    "f1_score": 0.8
+  },
+  "vocab_size": 458,
+  "sample_count": 20
+}
